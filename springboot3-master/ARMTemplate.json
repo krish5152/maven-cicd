@@ -1,0 +1,65 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "type": "String",
+            "metadata": {
+                "description": "The name of you Virtual Machine."
+            }
+        },
+        "location": {
+            "defaultValue": "[resourceGroup().location]",
+            "type": "String",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "VSTSAccountName": {
+            "type": "String",
+            "metadata": {
+                "description": "Azure devops account"
+            }
+        },
+        "TeamProject": {
+            "type": "String",
+            "metadata": {
+                "description": "Name of your project"
+            }
+        },
+        "DeploymentGroup": {
+            "type": "String",
+            "metadata": {
+                "description": "The deployment group against which deployment agent will be registered"
+            }
+        },
+        "PATToken": {
+            "type": "String",
+            "metadata": {
+                "description": "Personal access token of your azure devops account "
+            }
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2015-06-15",
+            "name": "[concat(parameters('vmName'),'/TeamServicesAgent')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publisher": "Microsoft.VisualStudio.Services",
+                "type": "TeamServicesAgentLinux",
+                "typeHandlerVersion": "1.0",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "VSTSAccountName": "[parameters('VSTSAccountName')]",
+                    "TeamProject": "[parameters('TeamProject')]",
+                    "DeploymentGroup": "[parameters('DeploymentGroup')]"
+                },
+                "protectedSettings": {
+                    "PATToken": "[parameters('PATToken')]"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "value": "simpleLinuxVM"
+        },
+        "location": {
+            "value": "UK South"
+        },
+        "vstsAccountName": {
+            "value": "https://dev.azure.com/pradeepselventhiran"
+        },
+        "teamProject": {
+            "value": "azure-devops-pipeline"
+        },
+        "deploymentGroup": {
+            "value": "LinuxDG"
+        },
+        "patToken": {
+            "value": "lr7mnbm26waqnmcc2duurdy7s7eldlurdh7wyox54ri65iqzqm7q"
+        }
+    }
+}
